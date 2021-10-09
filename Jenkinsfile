@@ -47,7 +47,7 @@ pipeline{
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
-                file: 'target/VstronixDevOpsLab-0.0.4-SNAPSHOT.war', 
+                file: "target/${ArtifactId}-${Version}.war",
                 type: 'war']], 
                 credentialsId: '46d2b97b-ede7-466e-bfcb-2670e8bc42e9', 
                 groupId: "${GroupId}", 

@@ -27,7 +27,7 @@ pipeline{
 
         stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'VstronixDevOpsLab', classifier: '', file: 'target/VstronixDevOpsLab-0.0.4-snapshot.war', type: 'war']], credentialsId: '16fecffb-7914-4369-be3a-bb20558587cd', groupId: 'com.vstronixdevopslab', nexusUrl: '172.31.10.47:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'VstronixDevOpsLab-SNAPSHOT', version: '0.0.4-snapshot'
+                nexusArtifactUploader artifacts: [[artifactId: 'VstronixDevOpsLab', classifier: '', file: 'target/VstronixDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: '46d2b97b-ede7-466e-bfcb-2670e8bc42e9', groupId: 'com.vstronixdevopslab', nexusUrl: '172.31.10.47:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'VstronixDevOpsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
             }
         }
 

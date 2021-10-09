@@ -41,7 +41,7 @@ pipeline{
         stage ('Publish to Nexus'){
             steps {
                 nexusArtifactUploader artifacts: 
-                [[artifactId: 'VstronixDevOpsLab', 
+                [[artifactId: '${ArtifactId}', 
                 classifier: '', 
                 file: 'target/VstronixDevOpsLab-0.0.4-SNAPSHOT.war', 
                 type: 'war']], 
@@ -51,7 +51,7 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'VstronixDevOpsLab-SNAPSHOT', 
-                version: '0.0.4-SNAPSHOT'
+                version: '${Version}'
             }
         }
 

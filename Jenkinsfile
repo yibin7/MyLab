@@ -56,15 +56,15 @@ pipeline{
         }
 
 
-        // Stage4 : Print some infomation
-        // stage ('Print Environment variables'){
-        //             steps{
-        //                 echo "Artifact ID is '${ArtifactId}'"
-        //                 echo "Version is '${Version}'"
-        //                 echo "GroupID is '{}'"
-        //                 echo "Name is '${Name}'"
-        //             }
-        // }
+        Stage4 : Print some infomation
+        stage ('Print Environment variables'){
+                    steps{
+                        echo "Artifact ID is '${ArtifactId}'"
+                        echo "Version is '${Version}'"
+                        echo "GroupID is '{}'"
+                        echo "Name is '${Name}'"
+                    }
+        }
 
         // Stage5 : Deploying
         stage ('Depoly'){

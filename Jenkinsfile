@@ -40,6 +40,10 @@ pipeline{
 
         stage ('Publish to Nexus'){
             steps {
+                script {
+
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? "VstronixDevOpsLab-SNAPSHOT" : "VstronixDevOpsLab-RELEASE"
+                
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
@@ -50,8 +54,9 @@ pipeline{
                 nexusUrl: '172.31.10.47:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: 'VstronixDevOpsLab-SNAPSHOT', 
+                repository: "${NexusRepo}", 
                 version: "${Version}"
+             }
             }
         }
 

@@ -32,7 +32,7 @@ pipeline{
         }
 
 
-        // Stage3 : Deploying
+        // Stage4 : Deploying
         stage ('Depoly'){
             steps {
                 echo ' deploying......'

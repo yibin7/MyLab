@@ -56,7 +56,7 @@ pipeline{
         }
 
 
-        Stage4 : Print some infomation
+        //Stage4 : Print some infomation
         stage ('Print Environment variables'){
                     steps{
                         echo "Artifact ID is '${ArtifactId}'"

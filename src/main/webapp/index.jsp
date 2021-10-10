@@ -32,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Vinay's DevOps AWS Lab</a>
+            <a class="navbar-brand" href="#">Vstronix's DevOps AWS Lab</a>
         </div>
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
@@ -52,7 +52,7 @@
 <div class="jumbotron">
     <div class="container">
         <h1>Hello Ansible Terraform Training</h1>
-        <p>This is Vstronix DevOps AWS Lab for 2021</p>
+        <p>This is Vstronix CICD Docker AWS Lab on 2021-10-10</p>
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
         <p><a class="btn btn-primary btn-lg" role="button">Success!! more &raquo;</a></p>
     </div>

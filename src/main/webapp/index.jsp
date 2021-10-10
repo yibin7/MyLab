@@ -51,7 +51,7 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Hello Ansible Terraform Training</h1>
+        <h1>Hello Ansible Terraform NEW Training</h1>
         <p>This is Vstronix CICD Docker AWS Lab on 2021-10-10</p>
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
         <p><a class="btn btn-primary btn-lg" role="button">Success!! more &raquo;</a></p>

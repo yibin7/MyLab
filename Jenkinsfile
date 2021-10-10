@@ -5,13 +5,6 @@ pipeline{
         maven 'maven'
     }
 
-    environment{
-       ArtifactId = readMavenPom().getArtifactId()
-       Version = readMavenPom().getVersion()
-       Name = readMavenPom().getName()
-       GroupId = readMavenPom().getGroupId()
-    }
-
     stages {
         // Specify various stage with in stages
 
@@ -29,91 +22,20 @@ pipeline{
 
             }
         }
-        
-        //stage3: publish the artefacts to Nexus
 
-        // stage ('Publish to Nexus'){
-        //     steps {
-        //         nexusArtifactUploader artifacts: [[artifactId: 'VstronixDevOpsLab', classifier: '', file: 'target/VstronixDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: '46d2b97b-ede7-466e-bfcb-2670e8bc42e9', groupId: 'com.vstronixdevopslab', nexusUrl: '172.31.10.47:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'VstronixDevOpsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
-        //     }
-        // }
-
-        stage ('Publish to Nexus'){
+        // Stage3 : Publish the source code to Sonarqube
+        stage ('Sonarqube Analysis'){
             steps {
-                script {
+                echo ' Source code published to Sonarqube for SCA......'
+                withSonarQubeEnv('sonarqube'){ // You can override the credential to be used
+                     sh 'mvn sonar:sonar'
+                }
 
-                def NexusRepo = Version.endsWith("SNAPSHOT") ? "VstronixDevOpsLab-SNAPSHOT" : "VstronixDevOpsLab-RELEASE"
-                
-                nexusArtifactUploader artifacts: 
-                [[artifactId: "${ArtifactId}", 
-                classifier: '', 
-                file: "target/${ArtifactId}-${Version}.war",
-                type: 'war']], 
-                credentialsId: '46d2b97b-ede7-466e-bfcb-2670e8bc42e9', 
-                groupId: "${GroupId}", 
-                nexusUrl: '172.31.10.47:8081', 
-                nexusVersion: 'nexus3', 
-                protocol: 'http', 
-                repository: "${NexusRepo}", 
-                version: "${Version}"
-             }
             }
         }
-
-
-        //Stage4 : Print some infomation
-        stage ('Print Environment variables'){
-                    steps{
-                        echo "Artifact ID is '${ArtifactId}'"
-                        echo "Version is '${Version}'"
-                        echo "GroupID is '${GroupId}'"
-                        echo "Name is '${Name}'"
-                    }
-        }
-
-        // Stage5 : Deploying
-        stage ('Depoly'){
-            steps {
-                echo ' deploying......'
-                sshPublisher(publishers: 
-                [sshPublisherDesc(
-                    configName: 'Ansible_Controller', 
-                    transfers: [
-                        sshTransfer(
-                            cleanRemote: false, 
-                            execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy.yaml -i /opt/playbooks/hosts', 
-                            execTimeout: 120000
-                        )
-                    ], 
-                    usePromotionTimestamp: false, 
-                    useWorkspaceInPromotion: false, 
-                    verbose: false)
-                ])
-            }
-        }
-
-        // Stage6 : Deploying the build artifact to Docker
-        stage ('Depoly to Docker'){
-            steps {
-                echo ' deploying......'
-                sshPublisher(publishers: 
-                [sshPublisherDesc(
-                    configName: 'Ansible_Controller', 
-                    transfers: [
-                        sshTransfer(
-                            cleanRemote: false, 
-                            execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy_docker.yaml -i /opt/playbooks/hosts', 
-                            execTimeout: 120000
-                        )
-                    ], 
-                    usePromotionTimestamp: false, 
-                    useWorkspaceInPromotion: false, 
-                    verbose: false)
-                ])
-            }
-        }
-
 
         
-	}
+        
+    }
+
 }
